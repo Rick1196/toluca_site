@@ -1,0 +1,9 @@
+vendor\bin\propel database:reverse "mysql:host=127.0.0.1;dbname=blogrodolfodb;user=root;password=" --database-name="blogrodolfodb" --output-dir="database"
+vendor\bin\propel model:build --platform="mysql" --config-dir="config" --output-dir="database/generated-classes" --schema-dir="database"
+vendor\bin\propel config:convert --config-dir="config" --output-dir="config" --output-file="propel-config.php"
+
+
+#MAC
+vendor/bin/propel database:reverse "mysql:host=127.0.0.1;dbname=blogrodolfodb;user=root;password=root" --database-name="blogrodolfodb" --output-dir="database"
+vendor/bin/propel model:build --platform="mysql" --config-dir="config" --output-dir="database/generated-classes" --schema-dir="database"
+vendor/bin/propel config:convert --config-dir="config" --output-dir="config" --output-file="propel-config.php"

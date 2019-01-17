@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="blogrodolfodb" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="catdirsis" idMethod="native" phpName="Catdirsis">
+    <column name="cvedirsis" phpName="Cvedirsis" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="cvemodsis" phpName="Cvemodsis" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="nomdirsis" phpName="Nomdirsis" type="VARCHAR" size="50" required="true"/>
+    <column name="dirdirsis" phpName="Dirdirsis" type="VARCHAR" size="100" required="true"/>
+    <column name="icndirsis" phpName="Icndirsis" type="VARCHAR" size="30" required="true"/>
+    <column name="orddirsis" phpName="Orddirsis" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <foreign-key foreignTable="catmodsis" name="catdirsis_cvemodsis_foreign" onDelete="SET NULL">
+      <reference local="cvemodsis" foreign="cvemodsis"/>
+    </foreign-key>
+    <index name="catdirsis_cvemodsis_foreign">
+      <index-column name="cvemodsis"/>
+    </index>
+    <unique name="catdirsis_nomdirsis_unique">
+      <unique-column name="nomdirsis"/>
+    </unique>
+    <unique name="catdirsis_dirdirsis_unique">
+      <unique-column name="dirdirsis"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="catentrol" idMethod="native" phpName="Catentrol">
+    <column name="cveentrol" phpName="Cveentrol" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nomentrol" phpName="Nomentrol" type="VARCHAR" size="120" required="true"/>
+    <column name="desentrol" phpName="Desentrol" type="VARCHAR" size="250" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="catmodsis" idMethod="native" phpName="Catmodsis">
+    <column name="cvemodsis" phpName="Cvemodsis" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="nommodsis" phpName="Nommodsis" type="VARCHAR" size="50" required="true"/>
+    <column name="dirmodsis" phpName="Dirmodsis" type="VARCHAR" size="100" required="true"/>
+    <column name="icnmodsis" phpName="Icnmodsis" type="VARCHAR" size="30" required="true"/>
+    <column name="ordmodsis" phpName="Ordmodsis" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <unique name="catmodsis_nommodsis_unique">
+      <unique-column name="nommodsis"/>
+    </unique>
+    <unique name="catmodsis_dirmodsis_unique">
+      <unique-column name="dirmodsis"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="denunciareplies" idMethod="native" phpName="Denunciareplies">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_denuncia" phpName="IdDenuncia" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="respuesta" phpName="Respuesta" type="VARCHAR" size="255" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="tbldenuncia" name="denunciareplies_id_denuncia_foreign">
+      <reference local="id_denuncia" foreign="id"/>
+    </foreign-key>
+    <index name="denunciareplies_id_denuncia_foreign">
+      <index-column name="id_denuncia"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="forums" idMethod="native" phpName="Forums">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="title" phpName="Title" type="VARCHAR" size="255" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="255" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_topic" phpName="IdTopic" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="topics" name="forums_ibfk_1">
+      <reference local="id_topic" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="forums_id_user_foreign">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="forums_id_user_foreign">
+      <index-column name="id_user"/>
+    </index>
+    <index name="id_topic">
+      <index-column name="id_topic"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="migrations" idMethod="native" phpName="Migrations">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="migration" phpName="Migration" type="VARCHAR" size="255" required="true"/>
+    <column name="batch" phpName="Batch" type="INTEGER" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="password_resets" idMethod="native" phpName="PasswordResets">
+    <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+    <column name="token" phpName="Token" type="VARCHAR" size="255" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="relperrol" idMethod="native" phpName="Relperrol">
+    <column name="cveperrol" phpName="Cveperrol" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="cveentrol" phpName="Cveentrol" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="cvemodsis" phpName="Cvemodsis" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="cvedirsis" phpName="Cvedirsis" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="catdirsis" name="relperrol_cvedirsis_foreign" onDelete="SET NULL">
+      <reference local="cvedirsis" foreign="cvedirsis"/>
+    </foreign-key>
+    <foreign-key foreignTable="catentrol" name="relperrol_cveentrol_foreign" onDelete="SET NULL">
+      <reference local="cveentrol" foreign="cveentrol"/>
+    </foreign-key>
+    <foreign-key foreignTable="catmodsis" name="relperrol_cvemodsis_foreign" onDelete="SET NULL">
+      <reference local="cvemodsis" foreign="cvemodsis"/>
+    </foreign-key>
+    <index name="relperrol_cveentrol_foreign">
+      <index-column name="cveentrol"/>
+    </index>
+    <index name="relperrol_cvemodsis_foreign">
+      <index-column name="cvemodsis"/>
+    </index>
+    <index name="relperrol_cvedirsis_foreign">
+      <index-column name="cvedirsis"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="replies" idMethod="native" phpName="Replies">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_forum" phpName="IdForum" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="content" phpName="Content" type="LONGVARCHAR" required="true"/>
+    <column name="nombre" phpName="Nombre" type="VARCHAR" size="255" required="true"/>
+    <column name="apellidos" phpName="Apellidos" type="VARCHAR" size="255" required="true"/>
+    <column name="correo" phpName="Correo" type="VARCHAR" size="255" required="true"/>
+    <column name="id_topic" phpName="IdTopic" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="forums" name="replies_id_forum_foreign">
+      <reference local="id_forum" foreign="id"/>
+    </foreign-key>
+    <index name="replies_id_forum_foreign">
+      <index-column name="id_forum"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="tbldenuncia" idMethod="native" phpName="Tbldenuncia">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="titulo" phpName="Titulo" type="VARCHAR" size="255" required="true"/>
+    <column name="context" phpName="Context" type="VARCHAR" size="255" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="status" phpName="Status" type="INTEGER" required="true"/>
+    <column name="id_topic" phpName="IdTopic" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="responsable" phpName="Responsable" type="INTEGER" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="topics" name="tbldenuncia_id_topic_foreign">
+      <reference local="id_topic" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="tbldenuncia_id_user_foreign">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="tbldenuncia_id_user_foreign">
+      <index-column name="id_user"/>
+    </index>
+    <index name="tbldenuncia_id_topic_foreign">
+      <index-column name="id_topic"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="topics" idMethod="native" phpName="Topics">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="title" phpName="Title" type="VARCHAR" size="255" required="true"/>
+    <column name="context" phpName="Context" type="LONGVARCHAR" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+    <column name="cveentrol" phpName="Cveentrol" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
+    <column name="remember_token" phpName="RememberToken" type="VARCHAR" size="100"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="catentrol" name="users_cveentrol_foreign">
+      <reference local="cveentrol" foreign="cveentrol"/>
+    </foreign-key>
+    <index name="users_cveentrol_foreign">
+      <index-column name="cveentrol"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
