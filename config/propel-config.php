@@ -4,7 +4,7 @@ $serviceContainer->checkVersion('2.0.0-dev');
 $serviceContainer->setAdapterClass('blogrodolfodb', 'mysql');
 $manager = new \Propel\Runtime\Connection\ConnectionManagerSingle();
 $manager->setConfiguration(array (
-  'dsn' => 'mysql:host=127.0.0.1;dbname=blogrodolfodb',
+  'dsn' => 'mysql:host=172.17.0.2;dbname=blogrodolfodb',
   'user' => 'lara',
   'password' => 'Nodo1820*',
   'settings' =>

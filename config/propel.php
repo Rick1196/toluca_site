@@ -12,9 +12,9 @@ return [
             'connections' => [
                 'blogrodolfodb' => [
                     'adapter' => 'mysql',
-                    'dsn' => 'mysql:host=127.0.0.1;dbname=blogrodolfodb',
-                    'user' => 'root',
-                    'password' => 'root',
+                    'dsn' => 'mysql:host=172.17.0.2;dbname=blogrodolfodb',
+                    'user' => 'lara',
+                    'password' => 'Nodo1820*',
                     'settings' => [
                         'charset' => 'utf8'
                     ]
